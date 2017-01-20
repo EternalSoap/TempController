@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MainController">
+   <children>
+      <TabPane layoutX="14.0" layoutY="14.0" prefHeight="572.0" prefWidth="771.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+          <Tab text="Temperature">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TextField layoutX="359.0" layoutY="55.0" prefHeight="25.0" prefWidth="323.0" AnchorPane.rightAnchor="100.0" />
+                        <TableView layoutX="102.0" layoutY="120.0" prefHeight="310.0" prefWidth="600.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="120.0" />
+                        <Label layoutX="86.0" layoutY="59.0" text="Željena temperatura" AnchorPane.leftAnchor="100.0" />
+                        <RadioButton layoutX="632.0" layoutY="483.0" mnemonicParsing="false" text="Upaljeno" AnchorPane.rightAnchor="100.0">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="toggleGroupHeating" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton layoutX="632.0" layoutY="517.0" mnemonicParsing="false" text="Ugašeno" toggleGroup="$toggleGroupHeating" AnchorPane.rightAnchor="100.0" />
+                        <Label layoutX="86.0" layoutY="500.0" text="Grijanje" AnchorPane.leftAnchor="100.0" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Sobe">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView layoutX="28.0" layoutY="36.0" prefHeight="511.0" prefWidth="397.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="30.0" />
+                        <TextField layoutX="548.0" layoutY="238.0" prefHeight="25.0" prefWidth="218.0" AnchorPane.rightAnchor="30.0" />
+                        <Label layoutX="458.0" layoutY="242.0" text="Ime sobe" />
+                        <Button layoutX="458.0" layoutY="312.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Dodaj" />
+                        <Button layoutX="675.0" layoutY="312.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="95.0" text="Obriši" AnchorPane.rightAnchor="30.0" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Senzori">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Button layoutX="675.0" layoutY="332.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Obriši" AnchorPane.rightAnchor="30.0" />
+                        <Button layoutX="458.0" layoutY="332.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Dodaj" />
+                        <Label layoutX="458.0" layoutY="219.0" text="Šifra senzora" />
+                        <TextField layoutX="550.0" layoutY="215.0" prefHeight="25.0" prefWidth="220.0" AnchorPane.rightAnchor="30.0" />
+                        <TableView layoutX="33.0" layoutY="30.0" prefHeight="511.0" prefWidth="397.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="30.0" />
+                        <ChoiceBox layoutX="550.0" layoutY="264.0" prefHeight="25.0" prefWidth="220.0" AnchorPane.rightAnchor="30.0" />
+                        <Label layoutX="458.0" layoutY="268.0" text="Soba" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Rasporedi">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView layoutX="14.0" layoutY="30.0" prefHeight="511.0" prefWidth="397.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="30.0" />
+                        <Button layoutX="458.0" layoutY="332.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Dodaj" />
+                        <Button layoutX="675.0" layoutY="332.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Obriši" AnchorPane.rightAnchor="30.0" />
+                        <DatePicker layoutX="550.0" layoutY="215.0" AnchorPane.rightAnchor="30.0" />
+                        <DatePicker layoutX="550.0" layoutY="264.0" AnchorPane.rightAnchor="30.0" />
+                        <Label layoutX="458.0" layoutY="219.0" text="Početak" />
+                        <Label layoutX="458.0" layoutY="268.0" text="Kraj" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Povijest">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <AreaChart layoutX="14.0" layoutY="157.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis side="LEFT" />
+                          </yAxis>
+                        </AreaChart>
+                        <ChoiceBox layoutX="155.0" layoutY="57.0" prefHeight="25.0" prefWidth="186.0" />
+                        <DatePicker layoutX="555.0" layoutY="57.0" prefHeight="25.0" prefWidth="210.0" AnchorPane.rightAnchor="30.0" />
+                        <Label layoutX="85.0" layoutY="61.0" text="Soba" />
+                        <Label layoutX="470.0" layoutY="61.0" text="Datum" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
