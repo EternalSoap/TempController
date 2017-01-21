@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="TempController:jar">
+    <output-path>$USER_HOME$/Desktop/out</output-path>
+    <root id="archive" name="TempController.jar">
+      <element id="module-output" name="TempController" />
+      <element id="extracted-dir" path="$USER_HOME$/Desktop/mariadb-java-client-1.5.7.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

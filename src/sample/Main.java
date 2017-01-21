@@ -31,6 +31,11 @@ public class Main extends Application {
 
 
 
+    public static void debugOutput(boolean debug,String text){
+        if(debug == true){
+            System.out.println(text);
+        }
+    }
 
 
 

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="anchorViewTemp" fx:id="anchorPaneTemp" minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.TempController">
+   <children>
+      <TextField id="txtSetTemp" fx:id="txtDesiredTemp" layoutX="359.0" layoutY="55.0" onMouseClicked="#onMouseClick" prefHeight="25.0" prefWidth="256.0" AnchorPane.rightAnchor="100.0" />
+      <TableView id="tableTempRoom" fx:id="tableViewRoomTemp" layoutX="102.0" layoutY="120.0" prefHeight="310.0" prefWidth="600.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="120.0" />
+      <Label layoutX="86.0" layoutY="59.0" text="Željena temperatura" AnchorPane.leftAnchor="100.0" />
+      <RadioButton id="rBtnHeatingOn" fx:id="radioButtonHeatingOn" layoutX="632.0" layoutY="483.0" mnemonicParsing="false" text="Upaljeno" AnchorPane.rightAnchor="100.0">
+         <toggleGroup>
+            <ToggleGroup fx:id="toggleGroupHeating" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton id="rBtnHeatingOff" fx:id="radioButtonHeatingOff" layoutX="632.0" layoutY="517.0" mnemonicParsing="false" text="Ugašeno" toggleGroup="$toggleGroupHeating" AnchorPane.rightAnchor="100.0" />
+      <Label layoutX="86.0" layoutY="500.0" text="Grijanje" AnchorPane.leftAnchor="100.0" />
+      <Label id="lblCurrSetTemp" fx:id="labelCurrentTemp" layoutX="400.0" layoutY="59.0" />
+   </children>
+</AnchorPane>
