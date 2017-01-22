@@ -95,6 +95,7 @@ public class SpaceController {
 
     }
 
+
     @FXML
     private void initialize(){
         Database database = new Database();
