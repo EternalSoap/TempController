@@ -19,6 +19,13 @@
                 </content>
 
             </Tab>
+            <Tab text="Prostori">
+
+                <content>
+                    <fx:include source="spaceView.fxml" fx:id="anchorPaneSpace"></fx:include>
+                </content>
+
+            </Tab>
           <Tab text="Sobe">
 
               <content>
@@ -47,6 +54,8 @@
                 </content>
 
             </Tab>
+
+
         </tabs>
       </TabPane>
    </children>
