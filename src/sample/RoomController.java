@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -14,12 +16,14 @@ import java.sql.SQLException;
  */
 public class RoomController {
 
-    private Connection connection;
+    private boolean debug = true;
 
-    private static final String getRoomQuery = "Select * from Soba where prostorId = ?";
+
 
     @FXML
     private TableView tableViewRoom = new TableView();
+    @FXML
+    private TableColumn<Room,String> tableColumnRoomName = new TableColumn<>();
     @FXML
     private Button btnRoomAdd = new Button();
     @FXML
@@ -27,25 +31,29 @@ public class RoomController {
     @FXML
     private TextField txtRoomName = new TextField();
 
+    private ObservableList<Room> roomsList = FXCollections.observableArrayList();
+
 
 
     public RoomController(){
-        Database database = new Database();
-        this.connection = database.getConnection();
     }
 
     @FXML
     private void initialize(){
         //get data from the db
-        try {
-            PreparedStatement preparedStatementRooms = connection.prepareStatement(getRoomQuery);
-            preparedStatementRooms.setInt(1,1);
 
 
+        tableColumnRoomName.setCellValueFactory(cellData -> cellData.getValue().roomNameProperty());
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        int selectedSpace = Main.getSelectedSpace();
+        Main.debugOutput(debug, ""+selectedSpace);
+
+        roomsList = Room.getRoomList(selectedSpace);
+
+
+        tableViewRoom.setItems(roomsList);
+
+
 
 
     }

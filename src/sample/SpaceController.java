@@ -21,10 +21,9 @@ public class SpaceController {
 
     private boolean debug = true;
 
-    private int selectedSpace = 0;
     private Connection connection;
-    private static final String selectedSpaceQuery = "Select odabraniProstor from Korisnik where korisnikID = 1";
-    private static final String spacesListQuery = "Select * from Prostor where korisnikID = 1";
+
+
 
     @FXML
     private TableView<Space> tableViewSpace = new TableView();
@@ -39,7 +38,6 @@ public class SpaceController {
     @FXML
     private Button btnSpaceSelect = new Button();
 
-    //TODO add change listeners to observable lists (preferably a class that handles sql stuff)
     private ObservableList<Space> spacesList = FXCollections.observableArrayList();
 
     public SpaceController(){
@@ -95,60 +93,13 @@ public class SpaceController {
 
     }
 
-
     @FXML
     private void initialize(){
-        Database database = new Database();
-        this.connection = database.getConnection();
+
         tableColumnSpaceName.setCellValueFactory(cellData -> cellData.getValue().spaceNameProperty());
 
-        try {
-            PreparedStatement preparedStatementSelectedSpace = connection.prepareStatement(selectedSpaceQuery);
-
-            ResultSet resultSetSelectedSpace = preparedStatementSelectedSpace.executeQuery();
-
-
-            if(!resultSetSelectedSpace.isBeforeFirst()) { // empty set
-
-                Main.debugOutput(debug,"Empty set");
-            }
-
-            while(resultSetSelectedSpace.next()){
-                this.selectedSpace = resultSetSelectedSpace.getInt("odabraniProstor");
-            }
-
-            PreparedStatement preparedStatementSpacesList = connection.prepareStatement(spacesListQuery);
-            ResultSet resultSetSpacesList = preparedStatementSpacesList.executeQuery();
-
-
-
-
-            if(!resultSetSpacesList.isBeforeFirst()){ // empty set
-                //not sure if this is a problem
-                //return;
-
-            }
-
-            while(resultSetSpacesList.next()){
-                Space space = new Space(resultSetSpacesList.getInt("prostorID"),
-                        resultSetSpacesList.getString("imeProstora"),
-                        (resultSetSpacesList.getInt("grijanjeUpaljeno") == 0?false:true),
-                        resultSetSpacesList.getInt("korisnikID"));
-
-                spacesList.add(space);
-
-            }
-
-            tableViewSpace.setItems(spacesList);
-
-
-
-            database.disconnect();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
+        spacesList = Space.getSpaceList();
+        tableViewSpace.setItems(spacesList);
 
     }
 
@@ -157,8 +108,18 @@ public class SpaceController {
 
         Space space = tableViewSpace.getSelectionModel().getSelectedItem();
         if(space !=null) {
-            this.selectedSpace = space.getSpaceID();
-            Main.debugOutput(debug, "" + selectedSpace);
+            Database database = new Database();
+            Connection connection = database.getConnection();
+            String updateSelectedSpaceQuery = "update Korisnik set odabraniProstor = ? where korisnikID = 1";
+            try {
+                PreparedStatement ps = connection.prepareStatement(updateSelectedSpaceQuery);
+                ps.setInt(1,space.getSpaceID());
+                ps.execute();
+                database.disconnect();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
         }
     }
 
@@ -182,6 +143,8 @@ public class SpaceController {
         }
 
     }
+
+
 
 
 
