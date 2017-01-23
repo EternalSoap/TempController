@@ -4,10 +4,8 @@ import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 
 /**
  * Created by frang on 22-Jan-17.
@@ -89,11 +87,18 @@ public class Space {
         Database database = new Database();
         Connection connection = database.getConnection();
         String insertSpaceQuery = "Insert into Prostor values (default,?,?,1)";
+        int newID = -1;
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(insertSpaceQuery);
+            PreparedStatement preparedStatement = connection.prepareStatement(insertSpaceQuery, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, this.getSpaceName());
             preparedStatement.setInt(2, (this.isHeatingOn() == true ? 1 : 0));
-            preparedStatement.execute();
+            preparedStatement.executeUpdate();
+            ResultSet rs = preparedStatement.getGeneratedKeys();
+
+            while(rs.next()){
+                newID = rs.getInt(1);
+            }
+            this.setSpaceID(newID);
 
 
             database.disconnect();
@@ -123,11 +128,11 @@ public class Space {
 
     }
 
-    public static ObservableList<Space> getSpaceList() {
+    public static ArrayList<Space> getSpaceList() {
 
         Database database = new Database();
         Connection connection = database.getConnection();
-        ObservableList<Space> spacesList = FXCollections.observableArrayList();
+        ArrayList<Space> spacesList = new ArrayList<>();
 
         try {
             PreparedStatement preparedStatementSpacesList = connection.prepareStatement(spacesListQuery);

@@ -38,70 +38,21 @@ public class SpaceController {
     @FXML
     private Button btnSpaceSelect = new Button();
 
-    private ObservableList<Space> spacesList = FXCollections.observableArrayList();
-
+    private ObservableList<Space> observableListSpace;
 
     public SpaceController(){
-
-
-
-    }
-
-    private void updateItem(ListChangeListener.Change<? extends Space> c) {
-        //not sure if i need this tbh
-    }
-
-    private void removeItem(ListChangeListener.Change<? extends Space> c) {
-
-        for(Space s : c.getRemoved()){
-            Main.debugOutput(debug, s.getSpaceName());
-
-            s.removeFromDB();
-
-        }
-
-    }
-
-    private void addItem(ListChangeListener.Change<? extends Space> c) {
-
-        for(Space s : c.getAddedSubList()){
-            Main.debugOutput(debug, s.getSpaceName());
-            if(s.getSpaceID()==-1   ) {
-                s.addToDB();
             }
 
-        }
 
-    }
 
     @FXML
     private void initialize(){
-        spacesList.addListener(new ListChangeListener<Space>() {
-            @Override
-            public void onChanged(Change<? extends Space> c) {
-                while(c.next()){
-                    if(c.wasUpdated()){
-                        // update c in database
-                        updateItem(c);
-
-                    }else if(c.wasAdded()){
-                        // create new item in database
-
-                        addItem(c);
-
-                    }else if(c.wasRemoved()){
-                        // delete item from database
-                        removeItem(c);
-                    }
-
-                }
-            }
-        });
 
         tableColumnSpaceName.setCellValueFactory(cellData -> cellData.getValue().spaceNameProperty());
 
-        spacesList = Space.getSpaceList();
-        tableViewSpace.setItems(spacesList);
+        observableListSpace = Main.getObservableListSpace();
+
+        tableViewSpace.setItems(observableListSpace);
 
     }
 
@@ -131,7 +82,7 @@ public class SpaceController {
         String spaceName = txtSpaceName.getText();
         if(spaceName != null){
             Space space = new Space(-1,spaceName,false,1);
-            spacesList.add(space);
+            observableListSpace.add(space);
         }
 
     }
@@ -141,7 +92,7 @@ public class SpaceController {
 
         Space space = tableViewSpace.getSelectionModel().getSelectedItem();
         if(space !=null){
-            spacesList.remove(space);
+            observableListSpace.remove(space);
         }
 
     }

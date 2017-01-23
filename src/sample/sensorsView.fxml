@@ -9,8 +9,13 @@
       <Button id="btnRemoveSensor" layoutX="675.0" layoutY="332.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Obriši" AnchorPane.rightAnchor="30.0" />
       <Button id="btnAddSensor" layoutX="458.0" layoutY="332.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Dodaj" />
       <Label layoutX="458.0" layoutY="219.0" text="Šifra senzora" />
-      <TextField id="txtSensorID" layoutX="550.0" layoutY="215.0" prefHeight="25.0" prefWidth="220.0" AnchorPane.rightAnchor="30.0" />
-      <TableView id="tableSensor" layoutX="33.0" layoutY="30.0" prefHeight="511.0" prefWidth="397.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="30.0" />
+      <ChoiceBox id="cbSensor" layoutX="550.0" layoutY="215.0" prefHeight="25.0" prefWidth="220.0" AnchorPane.rightAnchor="30.0" />
+      <TableView id="tableSensor" layoutX="33.0" layoutY="30.0" prefHeight="511.0" prefWidth="397.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="30.0">
+         <columns>
+            <TableColumn prefWidth="122.0" text="Šifra senzora" />
+            <TableColumn prefWidth="132.0" text="Soba" />
+            <TableColumn minWidth="0.0" prefWidth="142.0" text="Trenutna temperatura" />
+         </columns></TableView>
       <ChoiceBox id="cbRoom" layoutX="550.0" layoutY="264.0" prefHeight="25.0" prefWidth="220.0" AnchorPane.rightAnchor="30.0" />
       <Label layoutX="458.0" layoutY="268.0" text="Soba" />
    </children>

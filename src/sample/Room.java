@@ -7,10 +7,9 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import javax.xml.transform.Result;
+import java.sql.*;
+import java.util.ArrayList;
 
 /**
  * Created by frang on 22-Jan-17.
@@ -68,9 +67,9 @@ public class Room {
     }
 
 
-    public static ObservableList<Room> getRoomList(int selectedSpace) {
+    public static ArrayList<Room> getRoomList(int selectedSpace) {
 
-        ObservableList<Room> roomsList = FXCollections.observableArrayList();
+        ArrayList<Room> roomsList = new ArrayList();
 
         try {
             Database database = new Database();
@@ -109,11 +108,21 @@ public class Room {
         Database database = new Database();
         Connection connection = database.getConnection();
         String insertRoomQuery = "insert into Soba values (default,?,?)";
+        int newID = -1;
         try {
-            PreparedStatement ps = connection.prepareStatement(insertRoomQuery);
+            PreparedStatement ps = connection.prepareStatement(insertRoomQuery, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1,this.getRoomName());
             ps.setInt(2,this.getSpaceID());
-            ps.execute();
+            ps.executeUpdate();
+
+            ResultSet rs = ps.getGeneratedKeys();
+
+            while(rs.next()){
+                newID = rs.getInt(1);
+            }
+
+            this.setRoomID(newID);
+
             database.disconnect();
         } catch (SQLException e) {
             e.printStackTrace();

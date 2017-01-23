@@ -1,21 +1,14 @@
 package sample;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
 /**
  * Created by frang on 21-Jan-17.
@@ -38,30 +31,12 @@ public class RoomController {
     @FXML
     private TextField txtRoomName = new TextField();
 
-    private ObservableList<Room> roomsList = FXCollections.observableArrayList();
+    private static ObservableList<Room> roomsList = FXCollections.observableArrayList();
     private static ObservableList<Node> observableListChildren;
 
 
 
     public RoomController(){
-
-
-    }
-
-    private void removeItem(ListChangeListener.Change<? extends Room> c) {
-
-        for(Room r : c.getRemoved()){
-            r.removeFromDB();
-        }
-    }
-
-    private void addItem(ListChangeListener.Change<? extends Room> c) {
-
-        for(Room r : c.getAddedSubList()){
-            if(r.getRoomID()==-1){
-                r.addToDB();
-            }
-        }
 
     }
 
@@ -78,28 +53,7 @@ public class RoomController {
         int selectedSpace = Main.getSelectedSpace();
         Main.debugOutput(debug, ""+selectedSpace);
 
-        roomsList = Room.getRoomList(selectedSpace);
-        roomsList.addListener(new ListChangeListener<Room>() {
-            @Override
-            public void onChanged(Change<? extends Room> c) {
-
-                Main.debugOutput(debug,"List Change");
-
-                while (c.next()) {
-                    if (c.wasAdded()) {
-
-                        addItem(c);
-
-                    } else if (c.wasRemoved()) {
-
-                        removeItem(c);
-
-                    }
-
-                }
-            }
-        });
-
+        roomsList = Main.getObservableListRoom();
 
         tableViewRoom.setItems(roomsList);
         tableViewRoom.refresh();
@@ -113,32 +67,10 @@ public class RoomController {
 
         tableViewRoom = (TableView) observableListChildren.get(0);
 
-        int selectedSpace = Main.getSelectedSpace();
-        Main.debugOutput(debug, ""+selectedSpace);
-
-        roomsList = Room.getRoomList(selectedSpace);
-        roomsList.addListener(new ListChangeListener<Room>() {
-            @Override
-            public void onChanged(Change<? extends Room> c) {
-
-                Main.debugOutput(debug,"List Change");
-
-                while (c.next()) {
-                    if (c.wasAdded()) {
-
-                        addItem(c);
-
-                    } else if (c.wasRemoved()) {
-
-                        removeItem(c);
-
-                    }
-
-                }
-            }
-        });
+        roomsList = Main.getObservableListRoom();
 
         tableViewRoom.setItems(roomsList);
+
         tableViewRoom.refresh();
 
 
