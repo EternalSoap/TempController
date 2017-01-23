@@ -18,6 +18,7 @@ public class Main extends Application {
     private Stage primaryStage;
 
 
+
     private static final String selectedSpaceQuery = "Select odabraniProstor from Korisnik where korisnikID = 1";
 
     @Override
@@ -26,7 +27,10 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Temperature Controller");
 
-        primaryStage.setScene(new Scene(root, 800, 600));
+        Scene mainScene = new Scene(root,800,600);
+
+
+        primaryStage.setScene(mainScene);
         primaryStage.show();
     }
 
@@ -38,6 +42,8 @@ public class Main extends Application {
     public Stage getPrimaryStage() {
         return primaryStage;
     }
+
+
 
 
 

@@ -40,29 +40,10 @@ public class SpaceController {
 
     private ObservableList<Space> spacesList = FXCollections.observableArrayList();
 
+
     public SpaceController(){
 
-        spacesList.addListener(new ListChangeListener<Space>() {
-            @Override
-            public void onChanged(Change<? extends Space> c) {
-                while(c.next()){
-                    if(c.wasUpdated()){
-                        // update c in database
-                        updateItem(c);
 
-                    }else if(c.wasAdded()){
-                        // create new item in database
-
-                        addItem(c);
-
-                    }else if(c.wasRemoved()){
-                        // delete item from database
-                        removeItem(c);
-                    }
-
-                }
-            }
-        });
 
     }
 
@@ -85,7 +66,7 @@ public class SpaceController {
 
         for(Space s : c.getAddedSubList()){
             Main.debugOutput(debug, s.getSpaceName());
-            if(s.getSpaceID()==0) {
+            if(s.getSpaceID()==-1   ) {
                 s.addToDB();
             }
 
@@ -95,6 +76,27 @@ public class SpaceController {
 
     @FXML
     private void initialize(){
+        spacesList.addListener(new ListChangeListener<Space>() {
+            @Override
+            public void onChanged(Change<? extends Space> c) {
+                while(c.next()){
+                    if(c.wasUpdated()){
+                        // update c in database
+                        updateItem(c);
+
+                    }else if(c.wasAdded()){
+                        // create new item in database
+
+                        addItem(c);
+
+                    }else if(c.wasRemoved()){
+                        // delete item from database
+                        removeItem(c);
+                    }
+
+                }
+            }
+        });
 
         tableColumnSpaceName.setCellValueFactory(cellData -> cellData.getValue().spaceNameProperty());
 
@@ -128,7 +130,7 @@ public class SpaceController {
 
         String spaceName = txtSpaceName.getText();
         if(spaceName != null){
-            Space space = new Space(0,spaceName,false,1);
+            Space space = new Space(-1,spaceName,false,1);
             spacesList.add(space);
         }
 
@@ -145,7 +147,9 @@ public class SpaceController {
     }
 
 
+    public void reinitialize() {
 
+        initialize();
 
-
+    }
 }

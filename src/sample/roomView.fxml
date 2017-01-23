@@ -12,7 +12,7 @@
          </columns></TableView>
       <TextField id="txtRoomName" fx:id="txtRoomName" layoutX="548.0" layoutY="238.0" prefHeight="25.0" prefWidth="218.0" AnchorPane.rightAnchor="30.0" />
       <Label layoutX="458.0" layoutY="242.0" text="Naziv sobe" />
-      <Button id="btnAddRoom" fx:id="btnRoomAdd" layoutX="458.0" layoutY="312.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Dodaj" />
-      <Button id="btnDeleteRoom" fx:id="btnRoomDelete" layoutX="675.0" layoutY="312.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="95.0" text="Obriši" AnchorPane.rightAnchor="30.0" />
+      <Button id="btnAddRoom" fx:id="btnRoomAdd" layoutX="458.0" layoutY="312.0" mnemonicParsing="false" onMouseClicked="#onAddButtonClicked" prefHeight="25.0" prefWidth="95.0" text="Dodaj" />
+      <Button id="btnDeleteRoom" fx:id="btnRoomDelete" layoutX="675.0" layoutY="312.0" mnemonicParsing="false" onMouseClicked="#onRemoveButtonClicked" prefHeight="22.0" prefWidth="95.0" text="Obriši" AnchorPane.rightAnchor="30.0" />
    </children>
 </AnchorPane>

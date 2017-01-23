@@ -109,13 +109,12 @@ public class Space {
         Database database = new Database();
         Connection connection = database.getConnection();
         String deleteSpaceQuery = "delete from Prostor where prostorID = ?";
-
-
         PreparedStatement preparedStatement = null;
         try {
             preparedStatement = connection.prepareStatement(deleteSpaceQuery);
             preparedStatement.setInt(1, this.getSpaceID());
             preparedStatement.execute();
+            database.disconnect();
 
         } catch (SQLException e) {
             e.printStackTrace();

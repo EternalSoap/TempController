@@ -42,5 +42,9 @@ public class TempController {
     }
 
 
+    public void reinitialize() {
 
+        initialize();
+
+    }
 }

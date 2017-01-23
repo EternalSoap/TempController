@@ -8,49 +8,49 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MainController">
+<AnchorPane fx:id="anchorPaneMain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MainController">
    <children>
-      <TabPane layoutX="14.0" layoutY="14.0" prefHeight="572.0" prefWidth="771.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <TabPane fx:id="tabPaneContent" layoutX="14.0" layoutY="14.0" prefHeight="572.0" prefWidth="771.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
-            <Tab text="Temperature">
+            <Tab fx:id="tabTemp" text="Temperature">
 
                 <content>
-                    <fx:include source="tempView.fxml" fx:id="anchorPaneTemp"></fx:include>
+                    <fx:include fx:id="anchorPaneTemp" source="tempView.fxml" />
                 </content>
 
             </Tab>
-            <Tab text="Prostori">
+            <Tab fx:id="tabSpace" text="Prostori">
 
                 <content>
-                    <fx:include source="spaceView.fxml" fx:id="anchorPaneSpace"></fx:include>
+                    <fx:include fx:id="anchorPaneSpace" source="spaceView.fxml" />
                 </content>
 
             </Tab>
-          <Tab text="Sobe">
+          <Tab fx:id="tabRoom" text="Sobe">
 
               <content>
-                  <fx:include source="roomView.fxml" fx:id="anchorPaneRoom"></fx:include>
+                  <fx:include fx:id="anchorPaneRoom" source="roomView.fxml" />
               </content>
 
           </Tab>
-            <Tab text="Senzori">
+            <Tab fx:id="tabSensor" text="Senzori">
 
                 <content>
-                    <fx:include source="sensorsView.fxml" fx:id="anchorPaneSensor"></fx:include>
+                    <fx:include fx:id="anchorPaneSensor" source="sensorsView.fxml" />
                 </content>
 
             </Tab>
-            <Tab text="Rasporedi">
+            <Tab fx:id="tabSchedule" text="Rasporedi">
 
                 <content>
-                    <fx:include source="scheduleView.fxml" fx:id="anchorPaneSchedule"></fx:include>
+                    <fx:include fx:id="anchorPaneSchedule" source="scheduleView.fxml" />
                 </content>
 
             </Tab>
-            <Tab text="Povijest">
+            <Tab fx:id="tabHistory" text="Povijest">
 
                 <content>
-                    <fx:include source="historyView.fxml" fx:id="anchorPaneHostory"></fx:include>
+                    <fx:include fx:id="anchorPaneHostory" source="historyView.fxml" />
                 </content>
 
             </Tab>

@@ -104,4 +104,36 @@ public class Room {
     }
 
 
+    public void addToDB() {
+
+        Database database = new Database();
+        Connection connection = database.getConnection();
+        String insertRoomQuery = "insert into Soba values (default,?,?)";
+        try {
+            PreparedStatement ps = connection.prepareStatement(insertRoomQuery);
+            ps.setString(1,this.getRoomName());
+            ps.setInt(2,this.getSpaceID());
+            ps.execute();
+            database.disconnect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void removeFromDB() {
+
+        Database database = new Database();
+        Connection connection = database.getConnection();
+        String removeRoomQuery = "delete from Soba where sobaID = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(removeRoomQuery);
+            ps.setInt(1,this.getRoomID());
+            ps.execute();
+            database.disconnect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
 }
