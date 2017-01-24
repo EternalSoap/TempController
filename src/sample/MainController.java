@@ -26,6 +26,8 @@ public class MainController {
     @FXML
     private TempController tempController = new TempController();
     @FXML
+    private SensorController sensorController = new SensorController();
+    @FXML
     private Tab tabTemp;
     @FXML
     private Tab tabSpace;
@@ -70,6 +72,8 @@ public class MainController {
                             roomController.reinitialize();
 
                         }else if (newValue == tabSensor){
+
+                            sensorController.reinitialize();
 
                         }else if (newValue == tabSchedule){
 

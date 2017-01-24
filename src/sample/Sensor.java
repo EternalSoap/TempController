@@ -3,6 +3,7 @@ package sample;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -62,7 +63,8 @@ public class Sensor {
         ArrayList<Sensor> sensorArrayList = new ArrayList<>();
         Database database = new Database();
         Connection connection = database.getConnection();
-        String getSensorListQuery = "select * from Sensor";
+        // query to get all the sensors for the selected space and unregistered sensors
+        String getSensorListQuery = "select * from Senzor where Senzor.sobaID in (select Soba.sobaID from Soba,Korisnik where Soba.prostorID = Korisnik.odabraniProstor) or Senzor.sobaID = -1";
 
         try {
             PreparedStatement ps = connection.prepareStatement(getSensorListQuery);
@@ -91,11 +93,17 @@ public class Sensor {
 
     public void addToDB(){
 
-
-
     }
 
+    /*
+        unregister the sensor
+     */
     public void removeFromDB(){
+
+        System.out.println("REMOVING STUFF");
+
+        //TODO
+
 
     }
 

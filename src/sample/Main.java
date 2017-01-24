@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -9,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,6 +28,8 @@ public class Main extends Application {
     private static ObservableList<Space> observableListSpace;
     private static ObservableList<Room> observableListRoom;
     private static ObservableList<Sensor> observableListSensor;
+    private static ObservableList<Choice> observableListChoices;
+    private static ObservableList<SensorInfo> observableListSensorInfo;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -51,6 +55,7 @@ public class Main extends Application {
     public Stage getPrimaryStage() {
         return primaryStage;
     }
+
 
     public static ObservableList<Room> getObservableListRoom() {
 
@@ -121,18 +126,59 @@ public class Main extends Application {
     public static ObservableList<Sensor> getObservableListSensor() {
 
         observableListSensor = FXCollections.observableArrayList(Sensor.getSensorList());
-        observableListSensor.addListener((ListChangeListener<Sensor>) c -> {
-            while (c.next()){
+
+        return observableListSensor;
+
+    }
+
+
+    public static ObservableList<Choice> getChoices(ObservableList<?> observableList){
+
+        observableListChoices = FXCollections.observableArrayList();
+
+        for (Object item :
+                observableList) {
+            if(item.getClass() == Sensor.class){ // is a sensor
+
+                Sensor s = (Sensor) item;
+                observableListChoices.add(new Choice(s.getSensorID(), "Senzor "+s.getSensorID()));
+
+            }else if (item.getClass() == Room.class){ // is a room
+
+                Room r = (Room) item;
+                observableListChoices.add(new Choice(r.getRoomID(),r.getRoomName()));
+
+            }
+        }
+        return observableListChoices;
+    }
+
+
+    public static ObservableList<SensorInfo> getObservableListSensorInfo (){
+
+        observableListSensorInfo = FXCollections.observableArrayList(new Callback<SensorInfo,Observable[]>(){
+
+            @Override
+            public Observable[] call(SensorInfo param) {
+                return new Observable[]{
+                        param.roomNameProperty(),
+                        param.roomIDProperty()
+                };
+            }
+        });
+        observableListSensorInfo.addAll(SensorInfo.getSensorInfoList());
+        observableListSensorInfo.addListener((ListChangeListener<SensorInfo>) c -> {
+            while(c.next()){
                 if(c.wasAdded()){
 
-                    for (Sensor s :
+                    for (SensorInfo s :
                             c.getAddedSubList()) {
                         s.addToDB();
                     }
 
                 }else if(c.wasRemoved()){
 
-                    for (Sensor s :
+                    for (SensorInfo s :
                             c.getRemoved()) {
                         s.removeFromDB();
                     }
@@ -141,13 +187,8 @@ public class Main extends Application {
             }
         });
 
-        return observableListSensor;
-
+        return observableListSensorInfo;
     }
-
-
-
-
 
 
     public static int getSelectedSpace (){
