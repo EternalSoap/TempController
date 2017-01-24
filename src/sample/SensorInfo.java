@@ -158,8 +158,19 @@ public class SensorInfo {
 
     public void removeFromDB() {
 
-        System.out.println("REMOVING SHIT LMAYY");
-        //TODO
+        Database database = new Database();
+        Connection connection = database.getConnection();
+        String unregisterSensorQuery = "update Senzor set sobaID = -1, status = 0 where senzorID = ?";
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(unregisterSensorQuery);
+            ps.setInt(1,this.getSensorID());
+            ps.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
 
     }
 }

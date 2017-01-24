@@ -5,12 +5,10 @@ import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -156,15 +154,9 @@ public class Main extends Application {
 
     public static ObservableList<SensorInfo> getObservableListSensorInfo (){
 
-        observableListSensorInfo = FXCollections.observableArrayList(new Callback<SensorInfo,Observable[]>(){
-
-            @Override
-            public Observable[] call(SensorInfo param) {
-                return new Observable[]{
-                        param.roomNameProperty(),
-                        param.roomIDProperty()
-                };
-            }
+        observableListSensorInfo = FXCollections.observableArrayList(param -> new Observable[]{
+                param.roomNameProperty(),
+                param.roomIDProperty()
         });
         observableListSensorInfo.addAll(SensorInfo.getSensorInfoList());
         observableListSensorInfo.addListener((ListChangeListener<SensorInfo>) c -> {
@@ -182,7 +174,6 @@ public class Main extends Application {
                             c.getRemoved()) {
                         s.removeFromDB();
                     }
-
                 }
             }
         });

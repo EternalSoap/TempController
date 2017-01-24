@@ -93,17 +93,16 @@ public class Sensor {
 
     public void addToDB(){
 
+        // not needed cause sensors get added automatically on the server side
+
     }
 
     /*
         unregister the sensor
      */
-    public void removeFromDB(){
+    public static void removeFromDB(){
 
-        System.out.println("REMOVING STUFF");
-
-        //TODO
-
+        // not needed, everything is done in SensorInfo
 
     }
 

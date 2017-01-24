@@ -110,6 +110,10 @@ public class SensorController {
 
         }
 
+        reinitialize();
+
+
+
     }
 
     public void reinitialize() {
