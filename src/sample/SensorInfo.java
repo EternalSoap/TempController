@@ -13,10 +13,10 @@ import java.util.ArrayList;
  */
 public class SensorInfo {
 
-    IntegerProperty sensorID;
-    StringProperty roomName;
-    IntegerProperty status;
-    IntegerProperty roomID;
+    private IntegerProperty sensorID;
+    private StringProperty roomName;
+    private IntegerProperty status;
+    private IntegerProperty roomID;
 
     public SensorInfo (int sensorID, String roomName, int status,Integer roomID){
         this.sensorID = new SimpleIntegerProperty(sensorID);

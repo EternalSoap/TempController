@@ -28,6 +28,7 @@ public class Main extends Application {
     private static ObservableList<Sensor> observableListSensor;
     private static ObservableList<Choice> observableListChoices;
     private static ObservableList<SensorInfo> observableListSensorInfo;
+    private static ObservableList<Schedule> observableListSchedule;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -179,6 +180,49 @@ public class Main extends Application {
         });
 
         return observableListSensorInfo;
+    }
+
+
+    public static ObservableList<Schedule> getObservableListSchedule(){
+
+        observableListSchedule = FXCollections.observableArrayList(param -> new Observable[]{
+                param.dayTempProperty(),
+                param.startDateProperty(),
+
+        });
+        observableListSchedule.addAll(Schedule.getScheduleList());
+        observableListSchedule.addListener((ListChangeListener<Schedule>) c -> {
+            while (c.next()){
+                if(c.wasAdded()){
+
+                    for (Schedule s :
+                            c.getAddedSubList()) {
+                        s.addToDB();
+                    }
+
+                }else if (c.wasRemoved()){
+
+                    for (Schedule s :
+                            c.getRemoved()) {
+                        s.removeFromDB();
+                    }
+
+                }
+            }
+        });
+
+        return observableListSchedule;
+    }
+
+
+    public static ObservableList<Choice> getObservableListTempChoice(int startTemp, int endTemp){
+
+        ObservableList<Choice> observableListTempChoice = FXCollections.observableArrayList();
+
+        for (int i=startTemp;i<=endTemp;i++){
+            observableListTempChoice.add(new Choice(i, ""+i));
+        }
+        return observableListTempChoice;
     }
 
 

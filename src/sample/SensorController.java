@@ -38,8 +38,6 @@ public class SensorController {
     private static ObservableList <SensorInfo> observableListSensorInfo;
 
 
-
-
     public SensorController(){
 
     }
@@ -92,12 +90,8 @@ public class SensorController {
                     observableListSensorInfo.set(i,sensorInfo);
 
                 }
-
             }
         }
-
-
-
     }
 
     @FXML
@@ -115,6 +109,7 @@ public class SensorController {
 
 
     }
+
 
     public void reinitialize() {
 

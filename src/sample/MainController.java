@@ -28,6 +28,8 @@ public class MainController {
     @FXML
     private SensorController sensorController = new SensorController();
     @FXML
+    private ScheduleController scheduleController = new ScheduleController();
+    @FXML
     private Tab tabTemp;
     @FXML
     private Tab tabSpace;
@@ -43,8 +45,6 @@ public class MainController {
     public MainController(){
 
         tabPaneContext =(TabPane) anchorPaneMain.lookup("#tabPaneContent");
-
-
 
     }
 
@@ -76,6 +76,8 @@ public class MainController {
                             sensorController.reinitialize();
 
                         }else if (newValue == tabSchedule){
+
+                            scheduleController.reinitialize();
 
                         }else if (newValue == tabHistory){
 

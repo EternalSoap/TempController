@@ -20,4 +20,5 @@ class Choice {
         result = 31 * result + (displayString != null ? displayString.hashCode() : 0);
         return result;
     }
+
 }
