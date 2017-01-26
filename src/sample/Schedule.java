@@ -32,6 +32,8 @@ public class Schedule {
         this.dayTemp = new SimpleIntegerProperty(dayTemp);
         if (nightTemp !=null){
             this.nightTemp = new SimpleIntegerProperty(nightTemp);
+        }else{
+            this.nightTemp = null;
         }
     }
 
@@ -126,7 +128,8 @@ public class Schedule {
                         rs.getTimestamp(2).toLocalDateTime().toLocalDate(),
                         (rs.getTimestamp(3))==null ?null: rs.getTimestamp(3).toLocalDateTime().toLocalDate(),
                         rs.getInt(4),
-                        rs.getInt(5)
+                        rs.getInt(5) == 0? null : rs.getInt(5)
+
                 ));
 
             }
@@ -208,18 +211,31 @@ public class Schedule {
 
         for (Schedule s :
                 arrayListSchedules) {
-            if(s.isIsInfinite() || this.isIsInfinite()){// no end dates, just check the start (not gonna work, needs separate checks for list item and this)
+            if(this.getStartDate() == s.getStartDate()) return true;
+            if(s.isIsInfinite()) { // no end dates
+                if (this.isIsInfinite()) { // both are infinite
+                    if (s.getStartDate().isBefore(this.getStartDate())) return true;
+                    if (this.getStartDate().isBefore(s.getStartDate())) return true;
+                }
+                // only s is infinite
 
-                if(s.getStartDate().isBefore(this.getStartDate())) return true;
-                if(this.getStartDate().isBefore(s.getStartDate())) return true;
+                if (this.getEndDate().isAfter(s.getStartDate())) return true;
 
-                //TODO infinites
+            }else if(this.isIsInfinite()){ // only this is infinite
+
+                if(s.getEndDate().isAfter(this.getStartDate())) return true;
 
             }else if(s.getStartDate().isBefore(this.getEndDate()) && s.getEndDate().isAfter(this.getStartDate())){ // true if overlap
                 isOverlapping = true;
             }
         }
         return isOverlapping;
+    }
+
+
+    public static boolean isCorrect(LocalDate ld1, LocalDate ld2){
+        if (ld1.isAfter(ld2)) return false;
+        return true;
     }
 
 }

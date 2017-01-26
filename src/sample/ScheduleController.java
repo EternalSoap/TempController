@@ -4,6 +4,7 @@ import javafx.beans.property.DoubleProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
@@ -48,7 +49,7 @@ public class ScheduleController {
     public ScheduleController() {}
 
     @FXML
-    private void initialize(){ //7,8
+    private void initialize(){
 
         observableListChildren = anchorPaneSchedule.getChildren();
         tableViewSchedule = (TableView<Schedule>) observableListChildren.get(0);
@@ -99,20 +100,23 @@ public class ScheduleController {
         LocalDate startDate = datePickerStartDate.getValue();
         LocalDate endDate = datePickerEndDate.getValue();
 
-        if(startDate != null && dayTempChoice != null ) {
-            Schedule schedule = new Schedule(
-                    -1,
-                    startDate,
-                    endDate,
-                    dayTempChoice.id,
-                    nightTempChoice==null?null:nightTempChoice.id
-            );
-            if(!schedule.isOverlapping()) {
+        if(endDate !=null && !Schedule.isCorrect(startDate,endDate)) return;
 
-                observableListSchedule.add(schedule);
+            if (startDate != null && dayTempChoice != null) {
+                Schedule schedule = new Schedule(
+                        -1,
+                        startDate,
+                        endDate,
+                        dayTempChoice.id,
+                        nightTempChoice == null ? null : nightTempChoice.id
+                );
+                if (!schedule.isOverlapping()) {
 
+                    observableListSchedule.add(schedule);
+
+                }
             }
-        }
+
     }
 
     @FXML

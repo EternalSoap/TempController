@@ -130,7 +130,7 @@ public class Room {
 
     }
 
-    public void removeFromDB() {
+    public void removeFromDB() { // TODO add sensor check when deleting room
 
         Database database = new Database();
         Connection connection = database.getConnection();

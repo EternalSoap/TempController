@@ -132,7 +132,7 @@ public class SensorInfo {
         Database database = new Database();
         Connection connection = database.getConnection();
         String getRoomNameQuery = "select imeSobe from Soba where sobaID = ?";
-        String updateSensorQuery = "update Senzor set sobaID = ? where senzorID = ?";
+        String updateSensorQuery = "update Senzor set sobaID = ?, status = 1 where senzorID = ?";
 
         try {
             PreparedStatement ps = connection.prepareStatement(getRoomNameQuery);
