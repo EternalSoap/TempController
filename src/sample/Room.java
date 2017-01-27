@@ -130,15 +130,21 @@ public class Room {
 
     }
 
-    public void removeFromDB() { // TODO add sensor check when deleting room
+    public void removeFromDB() {
 
         Database database = new Database();
         Connection connection = database.getConnection();
         String removeRoomQuery = "delete from Soba where sobaID = ?";
+        String updateSensorsQuery = "update Senzor set sobaID = -1, status = 0 where sobaID = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(removeRoomQuery);
             ps.setInt(1,this.getRoomID());
             ps.execute();
+
+            ps = connection.prepareStatement(updateSensorsQuery);
+            ps.setInt(1,this.getRoomID());
+            ps.execute();
+
             database.disconnect();
         } catch (SQLException e) {
             e.printStackTrace();
