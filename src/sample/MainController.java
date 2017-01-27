@@ -9,6 +9,8 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 
+import java.text.ParseException;
+
 public class MainController {
 
     boolean debug = true;
@@ -29,6 +31,8 @@ public class MainController {
     private SensorController sensorController = new SensorController();
     @FXML
     private ScheduleController scheduleController = new ScheduleController();
+    @FXML
+    private HistoryController historyController = new HistoryController();
     @FXML
     private Tab tabTemp;
     @FXML
@@ -80,6 +84,12 @@ public class MainController {
                             scheduleController.reinitialize();
 
                         }else if (newValue == tabHistory){
+
+                            try {
+                                historyController.reinitialize();
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
 
                         }
 
