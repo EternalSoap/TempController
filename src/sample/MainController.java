@@ -85,11 +85,7 @@ public class MainController {
 
                         }else if (newValue == tabHistory){
 
-                            try {
-                                historyController.reinitialize();
-                            } catch (ParseException e) {
-                                e.printStackTrace();
-                            }
+                            historyController.reinitialize();
 
                         }
 
