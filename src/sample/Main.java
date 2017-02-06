@@ -215,9 +215,15 @@ public class Main extends Application {
     }
 
 
-    public static ObservableList<Choice> getObservableListTempChoice(int startTemp, int endTemp){
+    public static ObservableList<Choice> getObservableListTempChoice(int startTemp, int endTemp, boolean nullValue){
 
         ObservableList<Choice> observableListTempChoice = FXCollections.observableArrayList();
+
+        if (nullValue == true){
+
+            observableListTempChoice.add(new Choice(0, "--"));
+
+        }
 
         for (int i=startTemp;i<=endTemp;i++){
             observableListTempChoice.add(new Choice(i, ""+i));

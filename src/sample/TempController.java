@@ -2,6 +2,7 @@ package sample;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 
 import java.sql.Connection;
@@ -16,11 +17,9 @@ public class TempController {
     private Connection connection;
 
     @FXML
-    private TextField txtDesiredTemp = new TextField();
+    private ChoiceBox<Choice> choiceBoxDesiredTemp = new ChoiceBox<>();
 
     public TempController(){
-        Database database = new Database();
-        this.connection = database.getConnection();
 
     }
 
@@ -28,18 +27,11 @@ public class TempController {
     private void initialize(){
        //load data from db, set current desired temp etc
 
-
-
-
-
-    }
-
-    @FXML
-    private void onMouseClick(){
-
+        choiceBoxDesiredTemp.setItems(Main.getObservableListTempChoice(15,30,true));
 
 
     }
+
 
 
     public void reinitialize() {

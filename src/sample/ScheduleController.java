@@ -1,10 +1,8 @@
 package sample;
 
-import javafx.beans.property.DoubleProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
@@ -57,7 +55,7 @@ public class ScheduleController {
         choiceBoxNightTemp = (ChoiceBox<Choice>) observableListChildren.get(8);
 
         observableListSchedule = Main.getObservableListSchedule();
-        observableListTempChoice = Main.getObservableListTempChoice(15,30);
+        observableListTempChoice = Main.getObservableListTempChoice(15,30, false);
 
         tableColumnStartDate.setCellValueFactory(cellData -> cellData.getValue().startDateProperty());
         tableColumnEndDate.setCellValueFactory(cellData -> cellData.getValue().endDateProperty());
@@ -78,7 +76,7 @@ public class ScheduleController {
         choiceBoxNightTemp = (ChoiceBox<Choice>) observableListChildren.get(8);
 
         observableListSchedule = Main.getObservableListSchedule();
-        observableListTempChoice = Main.getObservableListTempChoice(15,30);
+        observableListTempChoice = Main.getObservableListTempChoice(15,30, false);
 
         tableColumnStartDate.setCellValueFactory(cellData -> cellData.getValue().startDateProperty());
         tableColumnEndDate.setCellValueFactory(cellData -> cellData.getValue().endDateProperty());
