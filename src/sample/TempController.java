@@ -1,8 +1,11 @@
 package sample;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
+import javafx.scene.Node;
+import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 
 import java.sql.Connection;
 
@@ -16,26 +19,40 @@ public class TempController {
     private Connection connection;
 
     @FXML
-    private TextField txtDesiredTemp = new TextField();
+    private ChoiceBox<Choice> choiceBoxDesiredTemp = new ChoiceBox<>();
+    @FXML
+    private Label labelCurrentTemp;
+    @FXML
+    private TableView<TemperatureInfo> tableViewRoomTemp;
+    @FXML
+    private AnchorPane anchorPaneTemp = new AnchorPane();
+    @FXML
+    private TableColumn<TemperatureInfo,String> tableColumnRoomName = new TableColumn<>();
+    @FXML
+    private TableColumn<TemperatureInfo,Number> tableColumnRoomTemp = new TableColumn<>();
 
-    public TempController(){
-        Database database = new Database();
-        this.connection = database.getConnection();
+    private static ObservableList<Node> observableListChildren;
+    private static ObservableList<TemperatureInfo> observableListTemperatureInfo;
 
-    }
+
+    public TempController(){}
 
     @FXML
     private void initialize(){
        //load data from db, set current desired temp etc
 
+        observableListChildren = anchorPaneTemp.getChildren();
+        tableViewRoomTemp = (TableView<TemperatureInfo>) observableListChildren.get(0);
+        labelCurrentTemp = (Label) observableListChildren.get(2);
 
+        observableListTemperatureInfo = Main.getObservableListTemperatureInfo();
 
+        tableColumnRoomName.setCellValueFactory(cellData -> cellData.getValue().roomNameProperty());
+        tableColumnRoomTemp.setCellValueFactory(cellData -> cellData.getValue().roomTempProperty());
 
-
-    }
-
-    @FXML
-    private void onMouseClick(){
+        choiceBoxDesiredTemp.setItems(Main.getObservableListTempChoice(15,30,true));
+        tableViewRoomTemp.setItems(observableListTemperatureInfo);
+        labelCurrentTemp.setText(String.valueOf(TemperatureInfo.getCurrentDesiredTemp(Main.getSelectedSpace())));
 
 
 
@@ -44,7 +61,31 @@ public class TempController {
 
     public void reinitialize() {
 
-        initialize();
+        tableViewRoomTemp = (TableView<TemperatureInfo>) observableListChildren.get(0);
+        labelCurrentTemp = (Label) observableListChildren.get(2);
+
+        observableListTemperatureInfo = Main.getObservableListTemperatureInfo();
+
+        tableColumnRoomName.setCellValueFactory(cellData -> cellData.getValue().roomNameProperty());
+        tableColumnRoomTemp.setCellValueFactory(cellData -> cellData.getValue().roomTempProperty());
+
+        choiceBoxDesiredTemp.setItems(Main.getObservableListTempChoice(15,30,true));
+        tableViewRoomTemp.setItems(observableListTemperatureInfo);
+        labelCurrentTemp.setText(String.valueOf(TemperatureInfo.getCurrentDesiredTemp(Main.getSelectedSpace())));
 
     }
+
+
+    @FXML
+    private void onSelectButtonClicked(){
+
+        Choice selectedManualTemp = choiceBoxDesiredTemp.getValue();
+
+        TemperatureInfo.setManualTemp(selectedManualTemp);
+
+        reinitialize();
+
+    }
+
+
 }

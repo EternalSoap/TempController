@@ -9,15 +9,16 @@
    <children>
       <AreaChart fx:id="areaChartHistory" layoutX="14.0" layoutY="157.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
          <xAxis>
-            <CategoryAxis side="BOTTOM" />
+            <NumberAxis autoRanging="false" minorTickLength="0.0" prefHeight="26.0" prefWidth="695.0" side="BOTTOM" tickLabelGap="1.0" tickUnit="1.0" upperBound="23.0" />
          </xAxis>
          <yAxis>
-            <NumberAxis side="LEFT" />
+            <NumberAxis side="LEFT" upperBound="50.0" />
          </yAxis>
       </AreaChart>
       <ChoiceBox fx:id="choiceBoxRoom" layoutX="155.0" layoutY="57.0" prefHeight="25.0" prefWidth="186.0" />
-      <DatePicker fx:id="datePickerDate" layoutX="555.0" layoutY="57.0" prefHeight="25.0" prefWidth="210.0" AnchorPane.rightAnchor="30.0" />
+      <DatePicker fx:id="datePickerDate" layoutX="448.0" layoutY="57.0" prefHeight="25.0" prefWidth="210.0" AnchorPane.rightAnchor="142.0" />
       <Label layoutX="85.0" layoutY="61.0" text="Soba" />
-      <Label layoutX="470.0" layoutY="61.0" text="Datum" />
+      <Label layoutX="400.0" layoutY="61.0" text="Datum" />
+      <Button fx:id="btnShowHistory" layoutX="718.0" layoutY="57.0" mnemonicParsing="false" onMouseClicked="#onShowButtonClicked" text="Prikaži" AnchorPane.rightAnchor="30.0" />
    </children>
 </AnchorPane>

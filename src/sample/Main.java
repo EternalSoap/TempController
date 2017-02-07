@@ -29,12 +29,14 @@ public class Main extends Application {
     private static ObservableList<Choice> observableListChoices;
     private static ObservableList<SensorInfo> observableListSensorInfo;
     private static ObservableList<Schedule> observableListSchedule;
+    private static ObservableList<TemperatureInfo> observableListTemperatureInfo;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         this.primaryStage = primaryStage;
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Temperature Controller");
+        primaryStage.setTitle("Kontrola grijanja");
+        primaryStage.setResizable(false);
 
         Scene mainScene = new Scene(root,800,600);
 
@@ -215,14 +217,28 @@ public class Main extends Application {
     }
 
 
-    public static ObservableList<Choice> getObservableListTempChoice(int startTemp, int endTemp){
+    public static ObservableList<Choice> getObservableListTempChoice(int startTemp, int endTemp, boolean nullValue){
 
         ObservableList<Choice> observableListTempChoice = FXCollections.observableArrayList();
+
+        if (nullValue == true){
+
+            observableListTempChoice.add(new Choice(0, "--"));
+
+        }
 
         for (int i=startTemp;i<=endTemp;i++){
             observableListTempChoice.add(new Choice(i, ""+i));
         }
         return observableListTempChoice;
+    }
+
+
+    public static ObservableList<TemperatureInfo> getObservableListTemperatureInfo(){
+
+        observableListTemperatureInfo = FXCollections.observableArrayList(TemperatureInfo.getTemperatureInfoList());
+        return observableListTemperatureInfo;
+
     }
 
 
