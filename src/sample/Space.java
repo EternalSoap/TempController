@@ -86,12 +86,13 @@ public class Space {
 
         Database database = new Database();
         Connection connection = database.getConnection();
-        String insertSpaceQuery = "Insert into Prostor values (default,?,?,1)";
+        String insertSpaceQuery = "Insert into Prostor values (default,?,?,?,1)";
         int newID = -1;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(insertSpaceQuery, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, this.getSpaceName());
             preparedStatement.setInt(2, (this.isHeatingOn() == true ? 1 : 0));
+            preparedStatement.setInt(3,20);
             preparedStatement.executeUpdate();
             ResultSet rs = preparedStatement.getGeneratedKeys();
 
